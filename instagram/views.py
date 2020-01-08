@@ -31,7 +31,7 @@ def signup(request):
     return render (request,'signup.html',{'form':form})
 @login_required(login_url='/accounts/login')
 def home(request):
-    title='Welcome to Instaphoto'
+    title='Welcome to Instapic'
     current_user=request.user
     profile_info=Profile.objects.all()
     profile=Profile.objects.get(user=current_user)
