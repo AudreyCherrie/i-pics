@@ -1,5 +1,12 @@
 ![pic](./static/mbele.png)
+
+
+
 ![pic](./static/katikati.png)
+
+
+
+![pic](./static/details.png)
 
 
 
