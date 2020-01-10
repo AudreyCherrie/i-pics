@@ -28,7 +28,7 @@ def signup(request):
     else:
         form=SignUpForm()
     return render (request,'signup.html',{'form':form})
-@login_required(login_url='/accounts/login')
+
 def home(request):
     title='Welcome to Instapic'
     current_user=request.user
@@ -37,13 +37,13 @@ def home(request):
     images=Image.objects.all()
 
     return render(request,'main/home.html',{"title":title,"profile_info":profile_info,"images":images,'profile':profile})
-@login_required(login_url='/accounts/login')
+
 def index(request):
     title='Welcome to instagram'
 
 
     return render(request,'main/index.html',{"title":title})
-@login_required
+
 def first_profile(request,profile_id):
     current_id=request.user.id
     current_profile=Profile.objects.get(id=profile_id)
