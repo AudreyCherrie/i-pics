@@ -17,7 +17,6 @@ def signup(request):
             user.profile.name=form.cleaned_data.get('name')
 
             user.profile.Bio=form.cleaned_data.get('Bio')
-
             user.profile.profile_image=form.cleaned_data.get('profile_image')
             user.save()
             raw_password=form.cleaned_data.get('password1')
@@ -37,8 +36,7 @@ def home(request):
     profile=Profile.objects.get(user=current_user)
     images=Image.objects.all()
 
-
-    return render(request,'main/home.html',{"title":title,"profile_info":profile_info,"images":images})
+    return render(request,'main/home.html',{"title":title,"profile_info":profile_info,"images":images,'profile':profile})
 @login_required(login_url='/accounts/login')
 def index(request):
     title='Welcome to instagram'
@@ -75,7 +73,7 @@ def add_image(request):
                 image=form.save(commit=False)
                 image.profile=profile_instance
                 image.save()
-                return redirect(first_profile,request.user.id)
+                return redirect(Home)
 
         else:
             form=ImageForm()
