@@ -97,16 +97,19 @@ def details(request,image_id):
     except DoesNotExsist:
         raise Http404()
 
-    images_profile=Image.objects.filter(id=image_id)
+    image_profile=Image.objects.filter(id=image_id)
 
     comment_details=Comment.objects.filter(image=current_image)
 
-    return render(request,'main/details.html',{"image_details":image_details,"comment_details":comment_details,"images":images,"is_liked":is_liked,"total_likes":images.total_likes(),"images_profile":images_profile})
+    return render(request,'main/details.html',{"image_details":image_details,"comment_details":comment_details,"images":images,"is_liked":is_liked,"total_likes":images.total_likes(),"image_profile":image_profile})
 
 def search_profile(request):
-    search_term=request.GET.get("profile")
-    searched_profiles=Profile.search(search_term)
-    return render (request,'main/search.html',{"searched_profiles":searched_profiles})
+    if request.method =='POST':
+        search_term=request.POST.get("profile")
+        searched_profiles=Profile.objects.filter(user__icontains=search_term)
+        return render (request,'main/search.html',{"searched_profiles":searched_profiles})
+
+    return render (request,'main/search.html')
 def nav(request,profile_id):
     title='hello'
     profile_info=Profile.objects.get(id=profile_id)

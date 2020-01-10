@@ -23,10 +23,12 @@ class Profile(models.Model):
         self.save()
     def delete_profile(self):
         self.delete()
+
     @classmethod
     def search(cls,search_term):
-        profiles=cls.objects.filter(name__icontains=search_term)
+        profiles=cls.objects.filter(user__id__icontains=search_term)
         return profiles
+        
     @classmethod
     def get_profile(cls):
         profile=Profile.objects.all()
