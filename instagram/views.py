@@ -32,11 +32,10 @@ def signup(request):
 def home(request):
     title='Welcome to Instapic'
     current_user=request.user
-    profile_info=Profile.objects.all()
-    profile=Profile.objects.get(user=current_user)
+
     images=Image.objects.all()
 
-    return render(request,'main/home.html',{"title":title,"profile_info":profile_info,"images":images,'profile':profile})
+    return render(request,'main/home.html',{"title":title,"images":images,'profile':profile})
 
 def index(request):
     title='Welcome to instagram'
