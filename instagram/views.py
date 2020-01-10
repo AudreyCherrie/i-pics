@@ -73,7 +73,7 @@ def add_image(request):
                 image=form.save(commit=False)
                 image.profile=profile_instance
                 image.save()
-                return redirect(Home)
+                return redirect("Home")
 
         else:
             form=ImageForm()
