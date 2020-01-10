@@ -35,7 +35,7 @@ def home(request):
 
     images=Image.objects.all()
 
-    return render(request,'main/home.html',{"title":title,"images":images,'profile':profile})
+    return render(request,'main/home.html',{"title":title,"images":images})
 
 def index(request):
     title='Welcome to instagram'
