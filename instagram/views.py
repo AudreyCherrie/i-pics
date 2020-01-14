@@ -21,28 +21,31 @@ def signup(request):
             user.save()
             raw_password=form.cleaned_data.get('password1')
             user=authenticate(username=user.username,password=raw_password)
-            return redirect (home)
+            return redirect ('Home')
             login(request, user)
-            return redirect (home)
+            return redirect ('Home')
 
     else:
         form=SignUpForm()
     return render (request,'signup.html',{'form':form})
-
+@login_required(login_url='/accounts/login')
 def home(request):
     title='Welcome to Instapic'
     current_user=request.user
-
+    profile_info=Profile.objects.all()
+    profile=Profile.objects.get(user=current_user)
     images=Image.objects.all()
 
-    return render(request,'main/home.html',{"title":title,"images":images})
 
+    return render(request,'main/home.html',{"title":title,"profile_info":profile_info,"images":images})
+
+@login_required(login_url='/accounts/login')  
 def index(request):
     title='Welcome to instagram'
 
 
     return render(request,'main/index.html',{"title":title})
-
+@login_required
 def first_profile(request,profile_id):
     current_id=request.user.id
     current_profile=Profile.objects.get(id=profile_id)
